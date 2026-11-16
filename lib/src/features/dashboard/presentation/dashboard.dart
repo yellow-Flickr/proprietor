@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:proprietor/src/administration/administration_home.dart';
-import 'package:proprietor/src/auth/log_in.dart';
-import 'package:proprietor/src/payments/payments_home.dart';
-import 'package:proprietor/src/properties/properties_home.dart';
-import 'package:proprietor/src/tenancy/tenancy_home.dart';
+import 'package:proprietor/src/features/administration/presentation/administration_home.dart';
+import 'package:proprietor/src/features/auth/presentation/log_in.dart';
+import 'package:proprietor/src/features/payments/presentation/payments_home.dart';
+import 'package:proprietor/src/features/properties/presentation/properties_home.dart';
+import 'package:proprietor/src/features/tenancy/presentation/tenancy_home.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:sizer/sizer.dart';
 
@@ -20,6 +20,13 @@ class Dashboard extends ConsumerStatefulWidget {
 
 class _DashboardState extends ConsumerState<Dashboard> {
   final _advancedDrawerController = AdvancedDrawerController();
+  int _currentIndex = 0;
+
+  void _onTabSelected(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -196,7 +203,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
             ],
           ),
           body: IndexedStack(
-            index: ref.watch(navigatorIndexProvider),
+            index: _currentIndex,
             children: const [
               PropertiesHome(),
               TenancyHome(),
@@ -204,22 +211,26 @@ class _DashboardState extends ConsumerState<Dashboard> {
               PaymentsHome(),
              ],
           ),
-          bottomNavigationBar: const BottomNavBar(),
+          bottomNavigationBar: BottomNavBar(
+            currentIndex: _currentIndex,
+            onTap: _onTabSelected,
+          ),
         ));
   }
 }
 
-final navigatorIndexProvider = StateProvider<int>((ref) => 0);
-
-class BottomNavBar extends ConsumerWidget {
+class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
     super.key,
+    required this.currentIndex,
+    required this.onTap,
   });
 
-  @override
-  Widget build(BuildContext context, ref) {
-    int currentIndex = ref.watch(navigatorIndexProvider);
+  final int currentIndex;
+  final ValueChanged<int> onTap;
 
+  @override
+  Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return SalomonBottomBar(
       currentIndex: currentIndex,
@@ -229,7 +240,7 @@ class BottomNavBar extends ConsumerWidget {
       selectedColorOpacity: .3,
       itemShape: const StadiumBorder(),
       // itemPadding: currentIndex==2?  EdgeInsets.symmetric(vertical: 10, horizontal: 10): EdgeInsets.symmetric(vertical: 10, horizontal: 16) ,
-      onTap: (i) => ref.read(navigatorIndexProvider.notifier).state = i,
+      onTap: onTap,
       items: [
         SalomonBottomBarItem(
           icon: const Icon(Icons.roofing_rounded),

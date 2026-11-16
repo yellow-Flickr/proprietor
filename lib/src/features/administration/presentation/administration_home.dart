@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:proprietor/src/tenancy/tenancy_home.dart';
+import 'package:proprietor/src/features/tenancy/presentation/tenancy_home.dart';
 import 'package:sizer/sizer.dart';
 
-import '../auth/log_in.dart';
+import '../../auth/presentation/log_in.dart';
 
-class PaymentsHome extends ConsumerWidget {
-  const PaymentsHome({super.key});
+class AdministrationHome extends ConsumerWidget {
+  const AdministrationHome({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var theme = Theme.of(context);
     List<(String, dynamic)> menuItems = [
-      ('Payment History', Icons.work_history),
-      ('Bill Records', Icons.receipt_long),
-      ('Lease Deposit', Icons.account_balance_wallet),
-      ('Bill Payment', Icons.credit_score_rounded),
+      ('Utilities', Icons.architecture_rounded),
+      ('Rules & Regulations', Icons.gavel_rounded),
+      ('House Policies', Icons.balance),
+      // ('Notices', Icons.send_outlined),
     ];
     return ListView(
       padding: EdgeInsets.symmetric(horizontal: 3.w),
@@ -194,11 +194,11 @@ class PaymentsHome extends ConsumerWidget {
         ),
         SizedBox(
           width: 90.w,
-          height: 12.5.h,
+          height: 12.h,
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: menuItems.length > 4 ? 4 : menuItems.length,
-              childAspectRatio: 1.2,
+              childAspectRatio: 1.6,
               mainAxisSpacing: 2,
               crossAxisSpacing: 2,
             ),

@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:proprietor/src/dashboard.dart';
-import 'package:proprietor/src/auth/forgot_password.dart';
-import 'package:proprietor/src/auth/log_in.dart';
-import 'package:proprietor/src/auth/sign_up.dart';
-import 'package:proprietor/src/dark_mode.dart';
-import 'package:proprietor/src/light_mode.dart';
-import 'package:proprietor/src/properties/add_property.dart';
-import 'package:proprietor/src/properties/amenities.dart';
-import 'package:proprietor/src/properties/maintenance.dart';
-import 'package:proprietor/src/properties/property_detail.dart';
-import 'package:proprietor/src/properties/property_list.dart';
-import 'package:proprietor/src/tenancy/add_tenant.dart';
-import 'package:proprietor/src/tenancy/tenant_list.dart';
+import 'package:proprietor/src/localization/app_localizations.dart';
+import 'package:proprietor/src/core/theme/dark_mode.dart';
+import 'package:proprietor/src/core/theme/light_mode.dart';
+import 'package:proprietor/src/features/auth/presentation/forgot_password.dart';
+import 'package:proprietor/src/features/auth/presentation/log_in.dart';
+import 'package:proprietor/src/features/auth/presentation/sign_up.dart';
+import 'package:proprietor/src/features/dashboard/presentation/dashboard.dart';
+import 'package:proprietor/src/features/properties/presentation/add_property.dart';
+import 'package:proprietor/src/features/properties/presentation/amenities.dart';
+import 'package:proprietor/src/features/properties/presentation/maintenance.dart';
+import 'package:proprietor/src/features/properties/presentation/property_detail.dart';
+import 'package:proprietor/src/features/properties/presentation/property_list.dart';
+import 'package:proprietor/src/features/settings/application/settings_controller.dart';
+import 'package:proprietor/src/features/settings/presentation/settings_view.dart';
+import 'package:proprietor/src/features/tenancy/presentation/add_tenant.dart';
+import 'package:proprietor/src/features/tenancy/presentation/tenant_list.dart';
 import 'package:sizer/sizer.dart';
 
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
-import 'settings/settings_controller.dart';
-import 'settings/settings_view.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
             // Provide the generated AppLocalizations to the MaterialApp. This
             // allows descendant Widgets to display the correct translations
             // depending on the user's locale.
-            localizationsDelegates: const [
+            localizationsDelegates: [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,

@@ -26,4 +26,5 @@ dev_dependencies:
   flutter_gen_runner: ^5.15.0
 
 flutter:
+  generate: true
   uses-material-design: true

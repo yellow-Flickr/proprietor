@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:proprietor/src/tenancy/add_tenant.dart';
-import 'package:proprietor/src/tenancy/tenant_list.dart';
+import 'package:proprietor/src/features/auth/presentation/forgot_password.dart';
+import 'package:proprietor/src/features/properties/presentation/add_property.dart';
+import 'package:proprietor/src/features/properties/presentation/amenities.dart';
+import 'package:proprietor/src/features/properties/presentation/maintenance.dart';
+import 'package:proprietor/src/features/properties/presentation/property_list.dart';
+import 'package:proprietor/src/features/tenancy/presentation/tenancy_home.dart';
 import 'package:sizer/sizer.dart';
 
-import '../auth/log_in.dart';
-
-class TenancyHome extends ConsumerWidget {
-  const TenancyHome({super.key});
+ 
+class PropertiesHome extends ConsumerWidget {
+  const PropertiesHome({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var theme = Theme.of(context);
     List<(String, dynamic, String)> menuItems = [
-      ('Add Tenant', Icons.group_add,AddTenant.routeName),
-      ('Tenants List', Icons.groups_rounded,TenantList.routeName),
-      ('Lease', Icons.bar_chart_rounded,''),
-      ('Send Notices', Icons.send_outlined,''),
+      ('Add Property', Icons.add_business, AddProperty.routeName),
+      ('Property List', Icons.location_city_sharp, PropertyList.routeName),
+      ('Amenities', Icons.app_registration_sharp, Amenities.routeName),
+      ('Maintenance', Icons.handyman_rounded, Maintenance.routeName),
     ];
     return ListView(
-      padding: EdgeInsets.symmetric(horizontal: 3.w),
       children: [
         SizedBox(
           height: 35.h,
@@ -190,121 +192,80 @@ class TenancyHome extends ConsumerWidget {
             ],
           ),
         ),
-        SizedBox(
-          height: 2.h,
-        ),
-        SizedBox(
-          width: 90.w,
-          height: 12.h,
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              childAspectRatio: 1.2,
-              mainAxisSpacing: 2,
-              crossAxisSpacing: 2,
+        ListView(
+          physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.symmetric(horizontal: 3.w),
+          shrinkWrap: true,
+          children: [
+            SizedBox(
+              height: 2.h,
             ),
-            itemCount: menuItems.length,
-            itemBuilder: (context, index) => DashboardMenu(
-               onTap: () {
+            SizedBox(
+              width: 90.w,
+              height: 12.h,
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  childAspectRatio: 1.2,
+                  mainAxisSpacing: 2,
+                  crossAxisSpacing: 2,
+                ),
+                itemCount: menuItems.length,
+                itemBuilder: (context, index) => DashboardMenu(
+                    onTap: () {
                       Navigator.pushNamed(context, menuItems[index].$3);
                     },
-                label: menuItems[index].$1, icon: menuItems[index].$2),
-          ),
-        ),
-        SizedBox(
-          height: 3.h,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+                    label: menuItems[index].$1,
+                    icon: menuItems[index].$2),
+              ),
+            ),
+            SizedBox(
+              height: 3.h,
+            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(
-                  Icons.history_rounded,
-                  size: 22,
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.history_rounded,
+                      size: 22,
+                    ),
+                    Text(
+                      'Recent Activites',
+                      style: theme.textTheme.titleSmall,
+                    ),
+                  ],
                 ),
-                Text(
-                  'Recent Activites',
-                  style: theme.textTheme.titleSmall,
-                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'More',
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                      Icon(Icons.arrow_drop_down_rounded,
+                          size: 26, color: Theme.of(context).primaryColor),
+                    ],
+                  ),
+                )
               ],
             ),
-            GestureDetector(
-              onTap: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    'More',
-                    style: Theme.of(context).textTheme.labelMedium,
-                  ),
-                  Icon(Icons.arrow_drop_down_rounded,
-                      size: 26, color: Theme.of(context).primaryColor),
-                ],
+            SizedBox(
+              height: 12.h,
+              child: Center(
+                child: Text(
+                  'No Recent Activities!',
+                  style:
+                      theme.textTheme.labelLarge?.copyWith(color: Colors.grey),
+                ),
               ),
-            )
-          ],
-        ),
-        SizedBox(
-          height: 12.h,
-          child: Center(
-            child: Text(
-              'No Recent Activities!',
-              style: theme.textTheme.labelLarge?.copyWith(color: Colors.grey),
             ),
-          ),
+          ],
         ),
       ],
     );
-  }
-}
-
-class DashboardMenu extends StatelessWidget {
-  const DashboardMenu({
-    super.key,
-    required this.label,
-    this.onTap,
-    required this.icon,
-  });
-
-  final String label;
-  final IconData icon;
-  final Function()? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return GestureDetector(
-        onTap: onTap,
-        child: Column(
-          children: [
-            Expanded(
-              child: Container(
-                height: 8.h,
-                width: 8.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: theme.primaryColor,
-                ),
-                child: Center(
-                  child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Icon(
-                        icon,
-                        color: theme.scaffoldBackgroundColor,
-                        size: 30,
-                      )),
-                ),
-              ),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              label,
-              textAlign: TextAlign.center,
-              style: theme.textTheme.labelSmall?.copyWith(fontSize: 1.2.h),
-            )
-          ],
-        ));
   }
 }

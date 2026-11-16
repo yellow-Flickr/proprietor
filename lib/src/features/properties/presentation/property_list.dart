@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:proprietor/src/auth/log_in.dart';
-import 'package:proprietor/src/properties/add_property.dart';
-import 'package:proprietor/src/properties/property_detail.dart';
+import 'package:proprietor/src/features/auth/presentation/log_in.dart';
+import 'package:proprietor/src/features/properties/presentation/add_property.dart';
+import 'package:proprietor/src/features/properties/presentation/property_detail.dart';
 import 'package:sizer/sizer.dart';
 
 class PropertyList extends ConsumerStatefulWidget {
