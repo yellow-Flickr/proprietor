@@ -5,7 +5,7 @@ import 'package:proprietor/src/features/administration/presentation/administrati
 import 'package:proprietor/src/features/auth/presentation/log_in.dart';
 import 'package:proprietor/src/features/payments/presentation/payments_home.dart';
 import 'package:proprietor/src/features/properties/presentation/properties_home.dart';
-import 'package:proprietor/src/features/tenancy/presentation/tenancy_home.dart';
+import 'package:proprietor/src/features/tenants/presentation/tenancy_home.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:sizer/sizer.dart';
 

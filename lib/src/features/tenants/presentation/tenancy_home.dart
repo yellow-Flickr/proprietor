@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:proprietor/src/features/tenancy/presentation/add_tenant.dart';
-import 'package:proprietor/src/features/tenancy/presentation/tenant_list.dart';
+import 'package:proprietor/src/features/tenants/presentation/add_tenant.dart';
+import 'package:proprietor/src/features/tenants/presentation/tenant_list.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../auth/presentation/log_in.dart';

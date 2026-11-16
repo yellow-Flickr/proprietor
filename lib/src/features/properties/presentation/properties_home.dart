@@ -5,7 +5,7 @@ import 'package:proprietor/src/features/properties/presentation/add_property.dar
 import 'package:proprietor/src/features/properties/presentation/amenities.dart';
 import 'package:proprietor/src/features/properties/presentation/maintenance.dart';
 import 'package:proprietor/src/features/properties/presentation/property_list.dart';
-import 'package:proprietor/src/features/tenancy/presentation/tenancy_home.dart';
+import 'package:proprietor/src/features/tenants/presentation/tenancy_home.dart';
 import 'package:sizer/sizer.dart';
 
  

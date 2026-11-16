@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:proprietor/src/features/tenancy/presentation/tenancy_home.dart';
+import 'package:proprietor/src/features/tenants/presentation/tenancy_home.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../auth/presentation/log_in.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'src/app.dart';
+import 'src/app/app.dart';
 import 'src/features/settings/application/settings_controller.dart';
 import 'src/features/settings/data/settings_service.dart';
 
