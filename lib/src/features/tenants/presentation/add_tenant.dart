@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:proprietor/src/features/auth/presentation/log_in.dart';
 import 'package:sizer/sizer.dart';
+import 'package:proprietor/src/shared/widgets/circles_paint.dart';
 
 class AddTenant extends ConsumerStatefulWidget {
   const AddTenant({super.key});

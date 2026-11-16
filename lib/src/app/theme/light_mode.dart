@@ -24,32 +24,36 @@ ThemeData lightMode = ThemeData(
   highlightColor: Colors.grey.shade200,
   // buttonTheme: const ButtonThemeData(buttonColor: Color(0xFF093634)),
   listTileTheme: ListTileThemeData(
-      horizontalTitleGap: 1.w,
-      dense: true,
-      visualDensity: VisualDensity.compact),
+    horizontalTitleGap: 1.w,
+    dense: true,
+    visualDensity: VisualDensity.compact,
+  ),
   checkboxTheme: CheckboxThemeData(
-      fillColor:
-          WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
-        if (states.contains(WidgetState.selected)) {
-          return const Color(0xFF093634);
-        }
-        return Colors.transparent;
-      }),
-      side: BorderSide(
-        color: Colors.grey.shade400,
-        width: 2,
-      )),
+    fillColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.selected)) {
+        return const Color(0xFF093634);
+      }
+      return Colors.transparent;
+    }),
+    side: BorderSide(color: Colors.grey.shade400, width: 2),
+  ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: lightScheme.primary, foregroundColor: Colors.white),
+    backgroundColor: lightScheme.primary,
+    foregroundColor: Colors.white,
+  ),
   radioTheme: RadioThemeData(
-    fillColor:
-        WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+    fillColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
       if (states.contains(WidgetState.selected)) {
         return const Color(0xFF093634);
       }
       return Colors.grey.shade400;
     }),
   ),
+
   // switchTheme: SwitchThemeData(
   //   trackColor:
   //       WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
@@ -87,7 +91,6 @@ ThemeData lightMode = ThemeData(
   //     ),
   //   ),
   // ),
-
   appBarTheme: AppBarTheme(
     // systemOverlayStyle: Sys,
     foregroundColor: Colors.white,
@@ -108,17 +111,16 @@ ThemeData lightMode = ThemeData(
     labelStyle: lightTextTheme.labelSmall,
     floatingLabelBehavior: FloatingLabelBehavior.always,
     hintStyle: lightTextTheme.labelSmall,
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
   ),
   textTheme: lightTextTheme,
   dividerTheme: const DividerThemeData(color: Colors.grey),
 );
 final TextTheme lightTextTheme = ThemeData.light().textTheme.apply(
-    bodyColor: lightScheme.onSurface,
-    displayColor: lightScheme.onSurface,
-    fontFamily: 'NotoSans');
+  bodyColor: lightScheme.onSurface,
+  displayColor: lightScheme.onSurface,
+  fontFamily: 'NotoSans',
+);
 
 const ColorScheme lightScheme = ColorScheme(
   brightness: Brightness.light,

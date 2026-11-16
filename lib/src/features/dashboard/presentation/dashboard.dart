@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proprietor/src/features/administration/presentation/administration_home.dart';
-import 'package:proprietor/src/features/auth/presentation/log_in.dart';
 import 'package:proprietor/src/features/payments/presentation/payments_home.dart';
 import 'package:proprietor/src/features/properties/presentation/properties_home.dart';
 import 'package:proprietor/src/features/tenants/presentation/tenancy_home.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:sizer/sizer.dart';
+import 'package:proprietor/src/shared/widgets/circles_paint.dart';
 
 class Dashboard extends ConsumerStatefulWidget {
   const Dashboard({super.key});

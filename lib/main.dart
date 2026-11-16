@@ -2,23 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'src/app/app.dart';
-import 'src/features/settings/application/settings_controller.dart';
 import 'src/features/settings/data/settings_service.dart';
+import 'src/features/settings/presentation/settings_controller.dart';
 
+/// Composition root: app-wide dependencies are created and wired here.
 void main() async {
-  // Set up the SettingsController, which will glue user settings to multiple
-  // Flutter Widgets.
-  final settingsController = SettingsController(SettingsService());
+  WidgetsFlutterBinding.ensureInitialized();
 
   // Load the user's preferred theme while the splash screen is displayed.
   // This prevents a sudden theme change when the app is first displayed.
-  await settingsController.loadSettings();
+  final settingsService = SettingsService();
+  final initialThemeMode = await settingsService.themeMode();
 
-  // Run the app and pass in the SettingsController. The app listens to the
-  // SettingsController for changes, then passes it further down to the
-  // SettingsView.
-  runApp(ProviderScope(
-    child:  MyApp(settingsController: settingsController)
-    
-  ));
+  runApp(
+    ProviderScope(
+      overrides: [
+        settingsServiceProvider.overrideWithValue(settingsService),
+        initialThemeModeProvider.overrideWithValue(initialThemeMode),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }

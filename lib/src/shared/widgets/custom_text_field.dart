@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-class  CustomTextField extends TextFormField
-{
-  CustomTextField({super.key,});
-
-  
-
+class CustomTextField extends TextFormField {
+  CustomTextField({super.key});
 }

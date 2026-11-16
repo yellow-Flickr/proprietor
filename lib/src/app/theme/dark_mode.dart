@@ -62,9 +62,10 @@ ThemeData darkMode = ThemeData(
   //       fontFamily: 'Montserrat'),
   // ),
   textTheme: ThemeData.light().textTheme.apply(
-      bodyColor: darkScheme.onSurface,
-      displayColor: darkScheme.onSurface,
-      fontFamily: 'NotoSans'),
+    bodyColor: darkScheme.onSurface,
+    displayColor: darkScheme.onSurface,
+    fontFamily: 'NotoSans',
+  ),
   dividerTheme: DividerThemeData(color: Colors.grey[200]),
 );
 

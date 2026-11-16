@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:proprietor/src/features/tenants/presentation/tenancy_home.dart';
 import 'package:sizer/sizer.dart';
+import 'package:proprietor/src/shared/widgets/circles_paint.dart';
+import 'package:proprietor/src/shared/widgets/dashboard_menu.dart';
 
-import '../../auth/presentation/log_in.dart';
 
 class AdministrationHome extends ConsumerWidget {
   const AdministrationHome({super.key});

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:proprietor/src/features/auth/presentation/forgot_password.dart';
 import 'package:proprietor/src/features/properties/presentation/add_property.dart';
 import 'package:proprietor/src/features/properties/presentation/amenities.dart';
 import 'package:proprietor/src/features/properties/presentation/maintenance.dart';
 import 'package:proprietor/src/features/properties/presentation/property_list.dart';
-import 'package:proprietor/src/features/tenants/presentation/tenancy_home.dart';
 import 'package:sizer/sizer.dart';
+import 'package:proprietor/src/shared/widgets/circles_paint.dart';
+import 'package:proprietor/src/shared/widgets/dashboard_menu.dart';
 
  
 class PropertiesHome extends ConsumerWidget {

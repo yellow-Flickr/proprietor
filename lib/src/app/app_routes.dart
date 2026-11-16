@@ -8,30 +8,20 @@ import 'package:proprietor/src/features/properties/presentation/amenities.dart';
 import 'package:proprietor/src/features/properties/presentation/maintenance.dart';
 import 'package:proprietor/src/features/properties/presentation/property_detail.dart';
 import 'package:proprietor/src/features/properties/presentation/property_list.dart';
-import 'package:proprietor/src/features/settings/application/settings_controller.dart';
 import 'package:proprietor/src/features/settings/presentation/settings_view.dart';
 import 'package:proprietor/src/features/tenants/presentation/add_tenant.dart';
 import 'package:proprietor/src/features/tenants/presentation/tenant_list.dart';
-import 'package:proprietor/src/sample_feature/sample_item_details_view.dart';
-import 'package:proprietor/src/sample_feature/sample_item_list_view.dart';
 
 class AppRoutes {
   const AppRoutes._();
 
-  static Route<dynamic> generate(
-    RouteSettings routeSettings,
-    SettingsController settingsController,
-  ) {
+  static Route<dynamic> generate(RouteSettings routeSettings) {
     return MaterialPageRoute<void>(
       settings: routeSettings,
       builder: (BuildContext context) {
         switch (routeSettings.name) {
           case SettingsView.routeName:
-            return SettingsView(controller: settingsController);
-          case SampleItemDetailsView.routeName:
-            return const SampleItemDetailsView();
-          case SampleItemListView.routeName:
-            return const SampleItemListView();
+            return const SettingsView();
           case Dashboard.routeName:
             return const Dashboard();
           case SignUp.routeName:
