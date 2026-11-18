@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 
-// Feature tables, plus the domain types and converters their generated code
+// Feature tables, plus the domain types their generated code
 // refers to.
 import '../../features/payments/data/payments_tables.dart';
 import '../../features/payments/domain/payment.dart';
@@ -19,7 +19,6 @@ import '../../features/tenants/domain/tenancy.dart';
 import '../../features/tenants/domain/tenant.dart';
 import '../domain/defaults.dart';
 import '../domain/record_status.dart';
-import 'converters.dart';
 
 part 'app_database.g.dart';
 

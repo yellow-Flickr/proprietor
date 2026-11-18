@@ -18,8 +18,8 @@ class RentObligations extends Table {
   TextColumn get currency =>
       text().withDefault(const Constant(defaultCurrencyCode))();
   TextColumn get description => text().nullable()();
-  TextColumn get statusOverride => textEnum<ObligationPaymentStatus>()
-      .nullable()();
+  TextColumn get statusOverride =>
+      textEnum<ObligationPaymentStatus>().nullable()();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime()();
 
@@ -50,12 +50,10 @@ class Payments extends Table {
   TextColumn get currency =>
       text().withDefault(const Constant(defaultCurrencyCode))();
   DateTimeColumn get receivedDate => dateTime()();
-  TextColumn get paymentMethod =>
-      textEnum<PaymentMethod>()();
+  TextColumn get paymentMethod => textEnum<PaymentMethod>()();
   TextColumn get reference => text().nullable()();
   TextColumn get notes => text().nullable()();
-  TextColumn get recordStatus =>
-      textEnum<PaymentRecordStatus>()();
+  TextColumn get recordStatus => textEnum<PaymentRecordStatus>()();
   TextColumn get reversalReason => text().nullable()();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime()();

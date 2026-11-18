@@ -2,11 +2,8 @@ import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/database/app_database.dart';
-import '../../../core/database/converters.dart';
 import '../../../core/database/database_provider.dart';
 import '../domain/tenancy.dart';
-
-const _statusConverter = SnakeCaseEnumConverter(TenancyStatus.values);
 
 class TenancyRepository {
   const TenancyRepository(this._db);
@@ -39,16 +36,12 @@ class TenancyRepository {
     DateTime? end,
     String? excludeId,
   }) {
-    final query = _query(unitId: unitId, statuses: TenancyStatus.confirmed)
-      ..where(
-        (t) =>
-            t.endDate.isNull() |
-            t.endDate.isBiggerOrEqualValue(DateOnlyConverter.format(start)),
-      );
+    final query = _query(
+      unitId: unitId,
+      statuses: TenancyStatus.confirmed,
+    )..where((t) => t.endDate.isNull() | t.endDate.isBiggerOrEqualValue(start));
     if (end != null) {
-      query.where(
-        (t) => t.startDate.isSmallerOrEqualValue(DateOnlyConverter.format(end)),
-      );
+      query.where((t) => t.startDate.isSmallerOrEqualValue(end));
     }
     if (excludeId != null) {
       query.where((t) => t.id.equals(excludeId).not());
@@ -75,7 +68,7 @@ class TenancyRepository {
     if (unitId != null) query.where((t) => t.unitId.equals(unitId));
     if (tenantId != null) query.where((t) => t.tenantId.equals(tenantId));
     if (statuses != null) {
-      query.where((t) => t.status.isIn(statuses.map(_statusConverter.toSql)));
+      query.where((t) => t.status.isInValues(statuses));
     }
     return query;
   }

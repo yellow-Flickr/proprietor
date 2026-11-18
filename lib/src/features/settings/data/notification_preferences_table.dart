@@ -7,8 +7,7 @@ import '../domain/notification_preference.dart';
 class NotificationPreferences extends Table {
   TextColumn get id => text()();
   TextColumn get landlordId => text().references(LandlordProfiles, #id)();
-  TextColumn get eventType =>
-      textEnum<NotificationEventType>()();
+  TextColumn get eventType => textEnum<NotificationEventType>()();
   BoolColumn get enabled => boolean().withDefault(const Constant(true))();
   IntColumn get daysBefore => integer().nullable()();
   DateTimeColumn get createdAt => dateTime()();

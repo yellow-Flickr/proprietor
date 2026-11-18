@@ -12,16 +12,14 @@ import '../domain/tenant.dart';
 class Tenants extends Table {
   TextColumn get id => text()();
   TextColumn get landlordId => text().references(LandlordProfiles, #id)();
-  TextColumn get tenantType =>
-      textEnum<TenantType>()();
+  TextColumn get tenantType => textEnum<TenantType>()();
   TextColumn get fullName => text()();
   TextColumn get phoneNumber => text()();
   TextColumn get alternativePhone => text().nullable()();
   TextColumn get email => text().nullable()();
   TextColumn get address => text().nullable()();
   TextColumn get privateNotes => text().nullable()();
-  TextColumn get recordStatus =>
-      textEnum<RecordStatus>()();
+  TextColumn get recordStatus => textEnum<RecordStatus>()();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime()();
   DateTimeColumn get archivedAt => dateTime().nullable()();
@@ -45,25 +43,21 @@ class Tenancies extends Table {
   TextColumn get unitId => text().references(Units, #id)();
   TextColumn get previousTenancyId =>
       text().nullable().references(Tenancies, #id)();
-  TextColumn get agreementType =>
-      textEnum<AgreementType>()();
+  TextColumn get agreementType => textEnum<AgreementType>()();
   DateTimeColumn get startDate => dateTime()();
   DateTimeColumn get endDate => dateTime().nullable()();
   IntColumn get agreedRentMinor => integer()();
   TextColumn get currency =>
       text().withDefault(const Constant(defaultCurrencyCode))();
-  TextColumn get paymentFrequency =>
-      textEnum<PaymentFrequency>()();
+  TextColumn get paymentFrequency => textEnum<PaymentFrequency>()();
   IntColumn get customFrequencyMonths => integer().nullable()();
   DateTimeColumn get firstDueDate => dateTime()();
   IntColumn get dueDay => integer().nullable()();
   IntColumn get securityDepositMinor => integer().nullable()();
   IntColumn get advanceAmountMinor => integer().nullable()();
   TextColumn get termsNotes => text().nullable()();
-  TextColumn get status =>
-      textEnum<TenancyStatus>()();
-  TextColumn get effectiveTerminationDate =>
-      text().map(const DateOnlyConverter()).nullable()();
+  TextColumn get status => textEnum<TenancyStatus>()();
+  DateTimeColumn get effectiveTerminationDate => dateTime().nullable()();
   TextColumn get terminationReason => text().nullable()();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime()();

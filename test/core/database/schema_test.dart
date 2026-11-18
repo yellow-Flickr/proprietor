@@ -13,7 +13,7 @@ void main() {
 
   setUp(() => app = TestApp());
 
-  test('stores enums as snake_case and business dates as YYYY-MM-DD', () async {
+  test('stores enums by name and dates as ISO-8601 UTC text', () async {
     final p = await app.seedPortfolio();
     await app.properties.updateProperty(
       p.property.copyWith(propertyType: PropertyType.mixedUse),
@@ -23,12 +23,12 @@ void main() {
     final property = await app.db
         .customSelect('SELECT property_type FROM properties')
         .getSingle();
-    expect(property.read<String>('property_type'), 'mixed_use');
+    expect(property.read<String>('property_type'), 'mixedUse');
 
     final tenancy = await app.db
         .customSelect('SELECT start_date, status FROM tenancies')
         .getSingle();
-    expect(tenancy.read<String>('start_date'), '2026-03-05');
+    expect(tenancy.read<String>('start_date'), '2026-03-05T00:00:00.000Z');
     expect(tenancy.read<String>('status'), 'active');
   });
 

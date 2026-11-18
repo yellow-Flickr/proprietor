@@ -2,7 +2,6 @@ import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/database/app_database.dart';
-import '../../../core/database/converters.dart';
 import '../../../core/database/database_provider.dart';
 import '../domain/rent_obligation.dart';
 
@@ -31,10 +30,8 @@ class RentObligationRepository {
               ..where(
                 (t) =>
                     t.tenancyId.equals(tenancyId) &
-                    t.periodStart.equals(
-                      DateOnlyConverter.format(periodStart),
-                    ) &
-                    t.periodEnd.equals(DateOnlyConverter.format(periodEnd)),
+                    t.periodStart.equals(periodStart) &
+                    t.periodEnd.equals(periodEnd),
               )
               ..limit(1))
             .getSingleOrNull();

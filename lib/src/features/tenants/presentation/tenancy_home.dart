@@ -6,7 +6,6 @@ import 'package:sizer/sizer.dart';
 import 'package:proprietor/src/shared/widgets/circles_paint.dart';
 import 'package:proprietor/src/shared/widgets/dashboard_menu.dart';
 
-
 class TenancyHome extends ConsumerWidget {
   const TenancyHome({super.key});
 
@@ -14,10 +13,10 @@ class TenancyHome extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var theme = Theme.of(context);
     List<(String, dynamic, String)> menuItems = [
-      ('Add Tenant', Icons.group_add,AddTenant.routeName),
-      ('Tenants List', Icons.groups_rounded,TenantList.routeName),
-      ('Lease', Icons.bar_chart_rounded,''),
-      ('Send Notices', Icons.send_outlined,''),
+      ('Add Tenant', Icons.group_add, AddTenant.routeName),
+      ('Tenants List', Icons.groups_rounded, TenantList.routeName),
+      ('Lease', Icons.bar_chart_rounded, ''),
+      ('Send Notices', Icons.send_outlined, ''),
     ];
     return ListView(
       padding: EdgeInsets.symmetric(horizontal: 3.w),
@@ -40,9 +39,7 @@ class TenancyHome extends ConsumerWidget {
                     padding: EdgeInsets.all(2.h),
                     width: 40.w,
                     height: 10.h,
-                    decoration: BoxDecoration(
-                      color: theme.primaryColor,
-                    ),
+                    decoration: BoxDecoration(color: theme.primaryColor),
 
                     child: CustomPaint(
                       painter: CirclesPaint(),
@@ -54,16 +51,20 @@ class TenancyHome extends ConsumerWidget {
                             child: Text(
                               'TEST RESULTS ARE OUT!',
                               style: theme.textTheme.headlineMedium?.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           const Expanded(
                             flex: 2,
-                            child: Icon(Icons.shopping_basket,
-                                color: Colors.white, size: 30),
-                          )
+                            child: Icon(
+                              Icons.shopping_basket,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -79,9 +80,7 @@ class TenancyHome extends ConsumerWidget {
                     padding: EdgeInsets.all(2.h),
                     width: 40.w,
                     height: 10.h,
-                    decoration: BoxDecoration(
-                      color: theme.primaryColor,
-                    ),
+                    decoration: BoxDecoration(color: theme.primaryColor),
 
                     child: CustomPaint(
                       painter: CirclesPaint(),
@@ -93,16 +92,20 @@ class TenancyHome extends ConsumerWidget {
                             child: Text(
                               'TEST RESULTS ARE OUT!',
                               style: theme.textTheme.headlineMedium?.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           const Expanded(
                             flex: 2,
-                            child: Icon(Icons.shopping_basket,
-                                color: Colors.white, size: 30),
-                          )
+                            child: Icon(
+                              Icons.shopping_basket,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -118,9 +121,7 @@ class TenancyHome extends ConsumerWidget {
                     padding: EdgeInsets.all(2.h),
                     width: 40.w,
                     height: 10.h,
-                    decoration: BoxDecoration(
-                      color: theme.primaryColor,
-                    ),
+                    decoration: BoxDecoration(color: theme.primaryColor),
 
                     child: CustomPaint(
                       painter: CirclesPaint(),
@@ -132,16 +133,20 @@ class TenancyHome extends ConsumerWidget {
                             child: Text(
                               'TEST RESULTS ARE OUT!',
                               style: theme.textTheme.headlineMedium?.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           const Expanded(
                             flex: 2,
-                            child: Icon(Icons.shopping_basket,
-                                color: Colors.white, size: 30),
-                          )
+                            child: Icon(
+                              Icons.shopping_basket,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -157,9 +162,7 @@ class TenancyHome extends ConsumerWidget {
                     padding: EdgeInsets.all(2.h),
                     width: 40.w,
                     height: 10.h,
-                    decoration: BoxDecoration(
-                      color: theme.primaryColor,
-                    ),
+                    decoration: BoxDecoration(color: theme.primaryColor),
 
                     child: CustomPaint(
                       painter: CirclesPaint(),
@@ -171,16 +174,20 @@ class TenancyHome extends ConsumerWidget {
                             child: Text(
                               'TEST RESULTS ARE OUT!',
                               style: theme.textTheme.headlineMedium?.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           const Expanded(
                             flex: 2,
-                            child: Icon(Icons.shopping_basket,
-                                color: Colors.white, size: 30),
-                          )
+                            child: Icon(
+                              Icons.shopping_basket,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -191,9 +198,7 @@ class TenancyHome extends ConsumerWidget {
             ],
           ),
         ),
-        SizedBox(
-          height: 2.h,
-        ),
+        SizedBox(height: 2.h),
         SizedBox(
           width: 90.w,
           height: 12.h,
@@ -206,28 +211,22 @@ class TenancyHome extends ConsumerWidget {
             ),
             itemCount: menuItems.length,
             itemBuilder: (context, index) => DashboardMenu(
-               onTap: () {
-                      Navigator.pushNamed(context, menuItems[index].$3);
-                    },
-                label: menuItems[index].$1, icon: menuItems[index].$2),
+              onTap: () {
+                Navigator.pushNamed(context, menuItems[index].$3);
+              },
+              label: menuItems[index].$1,
+              icon: menuItems[index].$2,
+            ),
           ),
         ),
-        SizedBox(
-          height: 3.h,
-        ),
+        SizedBox(height: 3.h),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                const Icon(
-                  Icons.history_rounded,
-                  size: 22,
-                ),
-                Text(
-                  'Recent Activites',
-                  style: theme.textTheme.titleSmall,
-                ),
+                const Icon(Icons.history_rounded, size: 22),
+                Text('Recent Activites', style: theme.textTheme.titleSmall),
               ],
             ),
             GestureDetector(
@@ -235,15 +234,15 @@ class TenancyHome extends ConsumerWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(
-                    'More',
-                    style: Theme.of(context).textTheme.labelMedium,
+                  Text('More', style: Theme.of(context).textTheme.labelMedium),
+                  Icon(
+                    Icons.arrow_drop_down_rounded,
+                    size: 26,
+                    color: Theme.of(context).primaryColor,
                   ),
-                  Icon(Icons.arrow_drop_down_rounded,
-                      size: 26, color: Theme.of(context).primaryColor),
                 ],
               ),
-            )
+            ),
           ],
         ),
         SizedBox(

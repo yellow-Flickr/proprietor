@@ -772,10 +772,14 @@ class $PropertiesTable extends Properties
     return $PropertiesTable(attachedDatabase, alias);
   }
 
-  static TypeConverter<PropertyType, String> $converterpropertyType =
-      const SnakeCaseEnumConverter(PropertyType.values);
-  static TypeConverter<RecordStatus, String> $converterrecordStatus =
-      const SnakeCaseEnumConverter(RecordStatus.values);
+  static JsonTypeConverter2<PropertyType, String, String>
+  $converterpropertyType = const EnumNameConverter<PropertyType>(
+    PropertyType.values,
+  );
+  static JsonTypeConverter2<RecordStatus, String, String>
+  $converterrecordStatus = const EnumNameConverter<RecordStatus>(
+    RecordStatus.values,
+  );
 }
 
 class PropertiesCompanion extends UpdateCompanion<Property> {
@@ -1446,14 +1450,17 @@ class $UnitsTable extends Units with TableInfo<$UnitsTable, Unit> {
     return $UnitsTable(attachedDatabase, alias);
   }
 
-  static TypeConverter<UnitType, String> $converterunitType =
-      const SnakeCaseEnumConverter(UnitType.values);
-  static TypeConverter<AvailabilityRestriction, String>
-  $converteravailabilityOverride = const SnakeCaseEnumConverter(
-    AvailabilityRestriction.values,
+  static JsonTypeConverter2<UnitType, String, String> $converterunitType =
+      const EnumNameConverter<UnitType>(UnitType.values);
+  static JsonTypeConverter2<AvailabilityRestriction, String, String>
+  $converteravailabilityOverride =
+      const EnumNameConverter<AvailabilityRestriction>(
+        AvailabilityRestriction.values,
+      );
+  static JsonTypeConverter2<RecordStatus, String, String>
+  $converterrecordStatus = const EnumNameConverter<RecordStatus>(
+    RecordStatus.values,
   );
-  static TypeConverter<RecordStatus, String> $converterrecordStatus =
-      const SnakeCaseEnumConverter(RecordStatus.values);
 }
 
 class UnitsCompanion extends UpdateCompanion<Unit> {
@@ -2050,10 +2057,12 @@ class $TenantsTable extends Tenants with TableInfo<$TenantsTable, Tenant> {
     return $TenantsTable(attachedDatabase, alias);
   }
 
-  static TypeConverter<TenantType, String> $convertertenantType =
-      const SnakeCaseEnumConverter(TenantType.values);
-  static TypeConverter<RecordStatus, String> $converterrecordStatus =
-      const SnakeCaseEnumConverter(RecordStatus.values);
+  static JsonTypeConverter2<TenantType, String, String> $convertertenantType =
+      const EnumNameConverter<TenantType>(TenantType.values);
+  static JsonTypeConverter2<RecordStatus, String, String>
+  $converterrecordStatus = const EnumNameConverter<RecordStatus>(
+    RecordStatus.values,
+  );
 }
 
 class TenantsCompanion extends UpdateCompanion<Tenant> {
@@ -2346,24 +2355,28 @@ class $TenanciesTable extends Tenancies
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   ).withConverter<AgreementType>($TenanciesTable.$converteragreementType);
+  static const VerificationMeta _startDateMeta = const VerificationMeta(
+    'startDate',
+  );
   @override
-  late final GeneratedColumnWithTypeConverter<DateTime, String> startDate =
-      GeneratedColumn<String>(
-        'start_date',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<DateTime>($TenanciesTable.$converterstartDate);
+  late final GeneratedColumn<DateTime> startDate = GeneratedColumn<DateTime>(
+    'start_date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _endDateMeta = const VerificationMeta(
+    'endDate',
+  );
   @override
-  late final GeneratedColumnWithTypeConverter<DateTime?, String> endDate =
-      GeneratedColumn<String>(
-        'end_date',
-        aliasedName,
-        true,
-        type: DriftSqlType.string,
-        requiredDuringInsert: false,
-      ).withConverter<DateTime?>($TenanciesTable.$converterendDaten);
+  late final GeneratedColumn<DateTime> endDate = GeneratedColumn<DateTime>(
+    'end_date',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _agreedRentMinorMeta = const VerificationMeta(
     'agreedRentMinor',
   );
@@ -2406,15 +2419,17 @@ class $TenanciesTable extends Tenancies
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _firstDueDateMeta = const VerificationMeta(
+    'firstDueDate',
+  );
   @override
-  late final GeneratedColumnWithTypeConverter<DateTime, String> firstDueDate =
-      GeneratedColumn<String>(
-        'first_due_date',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<DateTime>($TenanciesTable.$converterfirstDueDate);
+  late final GeneratedColumn<DateTime> firstDueDate = GeneratedColumn<DateTime>(
+    'first_due_date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _dueDayMeta = const VerificationMeta('dueDay');
   @override
   late final GeneratedColumn<int> dueDay = GeneratedColumn<int>(
@@ -2464,17 +2479,16 @@ class $TenanciesTable extends Tenancies
         type: DriftSqlType.string,
         requiredDuringInsert: true,
       ).withConverter<TenancyStatus>($TenanciesTable.$converterstatus);
+  static const VerificationMeta _effectiveTerminationDateMeta =
+      const VerificationMeta('effectiveTerminationDate');
   @override
-  late final GeneratedColumnWithTypeConverter<DateTime?, String>
-  effectiveTerminationDate =
-      GeneratedColumn<String>(
+  late final GeneratedColumn<DateTime> effectiveTerminationDate =
+      GeneratedColumn<DateTime>(
         'effective_termination_date',
         aliasedName,
         true,
-        type: DriftSqlType.string,
+        type: DriftSqlType.dateTime,
         requiredDuringInsert: false,
-      ).withConverter<DateTime?>(
-        $TenanciesTable.$convertereffectiveTerminationDaten,
       );
   static const VerificationMeta _terminationReasonMeta = const VerificationMeta(
     'terminationReason',
@@ -2576,6 +2590,20 @@ class $TenanciesTable extends Tenancies
         ),
       );
     }
+    if (data.containsKey('start_date')) {
+      context.handle(
+        _startDateMeta,
+        startDate.isAcceptableOrUnknown(data['start_date']!, _startDateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_startDateMeta);
+    }
+    if (data.containsKey('end_date')) {
+      context.handle(
+        _endDateMeta,
+        endDate.isAcceptableOrUnknown(data['end_date']!, _endDateMeta),
+      );
+    }
     if (data.containsKey('agreed_rent_minor')) {
       context.handle(
         _agreedRentMinorMeta,
@@ -2601,6 +2629,17 @@ class $TenanciesTable extends Tenancies
           _customFrequencyMonthsMeta,
         ),
       );
+    }
+    if (data.containsKey('first_due_date')) {
+      context.handle(
+        _firstDueDateMeta,
+        firstDueDate.isAcceptableOrUnknown(
+          data['first_due_date']!,
+          _firstDueDateMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_firstDueDateMeta);
     }
     if (data.containsKey('due_day')) {
       context.handle(
@@ -2630,6 +2669,15 @@ class $TenanciesTable extends Tenancies
       context.handle(
         _termsNotesMeta,
         termsNotes.isAcceptableOrUnknown(data['terms_notes']!, _termsNotesMeta),
+      );
+    }
+    if (data.containsKey('effective_termination_date')) {
+      context.handle(
+        _effectiveTerminationDateMeta,
+        effectiveTerminationDate.isAcceptableOrUnknown(
+          data['effective_termination_date']!,
+          _effectiveTerminationDateMeta,
+        ),
       );
     }
     if (data.containsKey('termination_reason')) {
@@ -2688,17 +2736,13 @@ class $TenanciesTable extends Tenancies
           data['${effectivePrefix}agreement_type'],
         )!,
       ),
-      startDate: $TenanciesTable.$converterstartDate.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}start_date'],
-        )!,
-      ),
-      endDate: $TenanciesTable.$converterendDaten.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}end_date'],
-        ),
+      startDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}start_date'],
+      )!,
+      endDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}end_date'],
       ),
       agreedRentMinor: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
@@ -2718,12 +2762,10 @@ class $TenanciesTable extends Tenancies
         DriftSqlType.int,
         data['${effectivePrefix}custom_frequency_months'],
       ),
-      firstDueDate: $TenanciesTable.$converterfirstDueDate.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}first_due_date'],
-        )!,
-      ),
+      firstDueDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}first_due_date'],
+      )!,
       dueDay: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}due_day'],
@@ -2746,14 +2788,10 @@ class $TenanciesTable extends Tenancies
           data['${effectivePrefix}status'],
         )!,
       ),
-      effectiveTerminationDate: $TenanciesTable
-          .$convertereffectiveTerminationDaten
-          .fromSql(
-            attachedDatabase.typeMapping.read(
-              DriftSqlType.string,
-              data['${effectivePrefix}effective_termination_date'],
-            ),
-          ),
+      effectiveTerminationDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}effective_termination_date'],
+      ),
       terminationReason: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}termination_reason'],
@@ -2774,24 +2812,16 @@ class $TenanciesTable extends Tenancies
     return $TenanciesTable(attachedDatabase, alias);
   }
 
-  static TypeConverter<AgreementType, String> $converteragreementType =
-      const SnakeCaseEnumConverter(AgreementType.values);
-  static TypeConverter<DateTime, String> $converterstartDate =
-      const DateOnlyConverter();
-  static TypeConverter<DateTime, String> $converterendDate =
-      const DateOnlyConverter();
-  static TypeConverter<DateTime?, String?> $converterendDaten =
-      NullAwareTypeConverter.wrap($converterendDate);
-  static TypeConverter<PaymentFrequency, String> $converterpaymentFrequency =
-      const SnakeCaseEnumConverter(PaymentFrequency.values);
-  static TypeConverter<DateTime, String> $converterfirstDueDate =
-      const DateOnlyConverter();
-  static TypeConverter<TenancyStatus, String> $converterstatus =
-      const SnakeCaseEnumConverter(TenancyStatus.values);
-  static TypeConverter<DateTime, String> $convertereffectiveTerminationDate =
-      const DateOnlyConverter();
-  static TypeConverter<DateTime?, String?> $convertereffectiveTerminationDaten =
-      NullAwareTypeConverter.wrap($convertereffectiveTerminationDate);
+  static JsonTypeConverter2<AgreementType, String, String>
+  $converteragreementType = const EnumNameConverter<AgreementType>(
+    AgreementType.values,
+  );
+  static JsonTypeConverter2<PaymentFrequency, String, String>
+  $converterpaymentFrequency = const EnumNameConverter<PaymentFrequency>(
+    PaymentFrequency.values,
+  );
+  static JsonTypeConverter2<TenancyStatus, String, String> $converterstatus =
+      const EnumNameConverter<TenancyStatus>(TenancyStatus.values);
 }
 
 class TenanciesCompanion extends UpdateCompanion<Tenancy> {
@@ -2881,19 +2911,19 @@ class TenanciesCompanion extends UpdateCompanion<Tenancy> {
     Expression<String>? unitId,
     Expression<String>? previousTenancyId,
     Expression<String>? agreementType,
-    Expression<String>? startDate,
-    Expression<String>? endDate,
+    Expression<DateTime>? startDate,
+    Expression<DateTime>? endDate,
     Expression<int>? agreedRentMinor,
     Expression<String>? currency,
     Expression<String>? paymentFrequency,
     Expression<int>? customFrequencyMonths,
-    Expression<String>? firstDueDate,
+    Expression<DateTime>? firstDueDate,
     Expression<int>? dueDay,
     Expression<int>? securityDepositMinor,
     Expression<int>? advanceAmountMinor,
     Expression<String>? termsNotes,
     Expression<String>? status,
-    Expression<String>? effectiveTerminationDate,
+    Expression<DateTime>? effectiveTerminationDate,
     Expression<String>? terminationReason,
     Expression<DateTime>? createdAt,
     Expression<DateTime>? updatedAt,
@@ -3002,14 +3032,10 @@ class TenanciesCompanion extends UpdateCompanion<Tenancy> {
       );
     }
     if (startDate.present) {
-      map['start_date'] = Variable<String>(
-        $TenanciesTable.$converterstartDate.toSql(startDate.value),
-      );
+      map['start_date'] = Variable<DateTime>(startDate.value);
     }
     if (endDate.present) {
-      map['end_date'] = Variable<String>(
-        $TenanciesTable.$converterendDaten.toSql(endDate.value),
-      );
+      map['end_date'] = Variable<DateTime>(endDate.value);
     }
     if (agreedRentMinor.present) {
       map['agreed_rent_minor'] = Variable<int>(agreedRentMinor.value);
@@ -3030,9 +3056,7 @@ class TenanciesCompanion extends UpdateCompanion<Tenancy> {
       );
     }
     if (firstDueDate.present) {
-      map['first_due_date'] = Variable<String>(
-        $TenanciesTable.$converterfirstDueDate.toSql(firstDueDate.value),
-      );
+      map['first_due_date'] = Variable<DateTime>(firstDueDate.value);
     }
     if (dueDay.present) {
       map['due_day'] = Variable<int>(dueDay.value);
@@ -3052,10 +3076,8 @@ class TenanciesCompanion extends UpdateCompanion<Tenancy> {
       );
     }
     if (effectiveTerminationDate.present) {
-      map['effective_termination_date'] = Variable<String>(
-        $TenanciesTable.$convertereffectiveTerminationDaten.toSql(
-          effectiveTerminationDate.value,
-        ),
+      map['effective_termination_date'] = Variable<DateTime>(
+        effectiveTerminationDate.value,
       );
     }
     if (terminationReason.present) {
@@ -3169,33 +3191,39 @@ class $RentObligationsTable extends RentObligations
       'REFERENCES tenancies (id)',
     ),
   );
+  static const VerificationMeta _periodStartMeta = const VerificationMeta(
+    'periodStart',
+  );
   @override
-  late final GeneratedColumnWithTypeConverter<DateTime, String> periodStart =
-      GeneratedColumn<String>(
-        'period_start',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<DateTime>($RentObligationsTable.$converterperiodStart);
+  late final GeneratedColumn<DateTime> periodStart = GeneratedColumn<DateTime>(
+    'period_start',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _periodEndMeta = const VerificationMeta(
+    'periodEnd',
+  );
   @override
-  late final GeneratedColumnWithTypeConverter<DateTime, String> periodEnd =
-      GeneratedColumn<String>(
-        'period_end',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<DateTime>($RentObligationsTable.$converterperiodEnd);
+  late final GeneratedColumn<DateTime> periodEnd = GeneratedColumn<DateTime>(
+    'period_end',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _dueDateMeta = const VerificationMeta(
+    'dueDate',
+  );
   @override
-  late final GeneratedColumnWithTypeConverter<DateTime, String> dueDate =
-      GeneratedColumn<String>(
-        'due_date',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<DateTime>($RentObligationsTable.$converterdueDate);
+  late final GeneratedColumn<DateTime> dueDate = GeneratedColumn<DateTime>(
+    'due_date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _amountDueMinorMeta = const VerificationMeta(
     'amountDueMinor',
   );
@@ -3303,6 +3331,33 @@ class $RentObligationsTable extends RentObligations
     } else if (isInserting) {
       context.missing(_tenancyIdMeta);
     }
+    if (data.containsKey('period_start')) {
+      context.handle(
+        _periodStartMeta,
+        periodStart.isAcceptableOrUnknown(
+          data['period_start']!,
+          _periodStartMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_periodStartMeta);
+    }
+    if (data.containsKey('period_end')) {
+      context.handle(
+        _periodEndMeta,
+        periodEnd.isAcceptableOrUnknown(data['period_end']!, _periodEndMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_periodEndMeta);
+    }
+    if (data.containsKey('due_date')) {
+      context.handle(
+        _dueDateMeta,
+        dueDate.isAcceptableOrUnknown(data['due_date']!, _dueDateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dueDateMeta);
+    }
     if (data.containsKey('amount_due_minor')) {
       context.handle(
         _amountDueMinorMeta,
@@ -3366,24 +3421,18 @@ class $RentObligationsTable extends RentObligations
         DriftSqlType.string,
         data['${effectivePrefix}tenancy_id'],
       )!,
-      periodStart: $RentObligationsTable.$converterperiodStart.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}period_start'],
-        )!,
-      ),
-      periodEnd: $RentObligationsTable.$converterperiodEnd.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}period_end'],
-        )!,
-      ),
-      dueDate: $RentObligationsTable.$converterdueDate.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}due_date'],
-        )!,
-      ),
+      periodStart: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}period_start'],
+      )!,
+      periodEnd: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}period_end'],
+      )!,
+      dueDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}due_date'],
+      )!,
       amountDueMinor: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}amount_due_minor'],
@@ -3418,18 +3467,12 @@ class $RentObligationsTable extends RentObligations
     return $RentObligationsTable(attachedDatabase, alias);
   }
 
-  static TypeConverter<DateTime, String> $converterperiodStart =
-      const DateOnlyConverter();
-  static TypeConverter<DateTime, String> $converterperiodEnd =
-      const DateOnlyConverter();
-  static TypeConverter<DateTime, String> $converterdueDate =
-      const DateOnlyConverter();
-  static TypeConverter<ObligationPaymentStatus, String>
-  $converterstatusOverride = const SnakeCaseEnumConverter(
+  static JsonTypeConverter2<ObligationPaymentStatus, String, String>
+  $converterstatusOverride = const EnumNameConverter<ObligationPaymentStatus>(
     ObligationPaymentStatus.values,
   );
-  static TypeConverter<ObligationPaymentStatus?, String?>
-  $converterstatusOverriden = NullAwareTypeConverter.wrap(
+  static JsonTypeConverter2<ObligationPaymentStatus?, String?, String?>
+  $converterstatusOverriden = JsonTypeConverter2.asNullable(
     $converterstatusOverride,
   );
 }
@@ -3485,9 +3528,9 @@ class RentObligationsCompanion extends UpdateCompanion<RentObligation> {
   static Insertable<RentObligation> custom({
     Expression<String>? id,
     Expression<String>? tenancyId,
-    Expression<String>? periodStart,
-    Expression<String>? periodEnd,
-    Expression<String>? dueDate,
+    Expression<DateTime>? periodStart,
+    Expression<DateTime>? periodEnd,
+    Expression<DateTime>? dueDate,
     Expression<int>? amountDueMinor,
     Expression<String>? currency,
     Expression<String>? description,
@@ -3552,19 +3595,13 @@ class RentObligationsCompanion extends UpdateCompanion<RentObligation> {
       map['tenancy_id'] = Variable<String>(tenancyId.value);
     }
     if (periodStart.present) {
-      map['period_start'] = Variable<String>(
-        $RentObligationsTable.$converterperiodStart.toSql(periodStart.value),
-      );
+      map['period_start'] = Variable<DateTime>(periodStart.value);
     }
     if (periodEnd.present) {
-      map['period_end'] = Variable<String>(
-        $RentObligationsTable.$converterperiodEnd.toSql(periodEnd.value),
-      );
+      map['period_end'] = Variable<DateTime>(periodEnd.value);
     }
     if (dueDate.present) {
-      map['due_date'] = Variable<String>(
-        $RentObligationsTable.$converterdueDate.toSql(dueDate.value),
-      );
+      map['due_date'] = Variable<DateTime>(dueDate.value);
     }
     if (amountDueMinor.present) {
       map['amount_due_minor'] = Variable<int>(amountDueMinor.value);
@@ -3691,15 +3728,17 @@ class $PaymentsTable extends Payments with TableInfo<$PaymentsTable, Payment> {
     requiredDuringInsert: false,
     defaultValue: const Constant(defaultCurrencyCode),
   );
+  static const VerificationMeta _receivedDateMeta = const VerificationMeta(
+    'receivedDate',
+  );
   @override
-  late final GeneratedColumnWithTypeConverter<DateTime, String> receivedDate =
-      GeneratedColumn<String>(
-        'received_date',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<DateTime>($PaymentsTable.$converterreceivedDate);
+  late final GeneratedColumn<DateTime> receivedDate = GeneratedColumn<DateTime>(
+    'received_date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   @override
   late final GeneratedColumnWithTypeConverter<PaymentMethod, String>
   paymentMethod = GeneratedColumn<String>(
@@ -3828,6 +3867,17 @@ class $PaymentsTable extends Payments with TableInfo<$PaymentsTable, Payment> {
         currency.isAcceptableOrUnknown(data['currency']!, _currencyMeta),
       );
     }
+    if (data.containsKey('received_date')) {
+      context.handle(
+        _receivedDateMeta,
+        receivedDate.isAcceptableOrUnknown(
+          data['received_date']!,
+          _receivedDateMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_receivedDateMeta);
+    }
     if (data.containsKey('reference')) {
       context.handle(
         _referenceMeta,
@@ -3890,12 +3940,10 @@ class $PaymentsTable extends Payments with TableInfo<$PaymentsTable, Payment> {
         DriftSqlType.string,
         data['${effectivePrefix}currency'],
       )!,
-      receivedDate: $PaymentsTable.$converterreceivedDate.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}received_date'],
-        )!,
-      ),
+      receivedDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}received_date'],
+      )!,
       paymentMethod: $PaymentsTable.$converterpaymentMethod.fromSql(
         attachedDatabase.typeMapping.read(
           DriftSqlType.string,
@@ -3936,12 +3984,14 @@ class $PaymentsTable extends Payments with TableInfo<$PaymentsTable, Payment> {
     return $PaymentsTable(attachedDatabase, alias);
   }
 
-  static TypeConverter<DateTime, String> $converterreceivedDate =
-      const DateOnlyConverter();
-  static TypeConverter<PaymentMethod, String> $converterpaymentMethod =
-      const SnakeCaseEnumConverter(PaymentMethod.values);
-  static TypeConverter<PaymentRecordStatus, String> $converterrecordStatus =
-      const SnakeCaseEnumConverter(PaymentRecordStatus.values);
+  static JsonTypeConverter2<PaymentMethod, String, String>
+  $converterpaymentMethod = const EnumNameConverter<PaymentMethod>(
+    PaymentMethod.values,
+  );
+  static JsonTypeConverter2<PaymentRecordStatus, String, String>
+  $converterrecordStatus = const EnumNameConverter<PaymentRecordStatus>(
+    PaymentRecordStatus.values,
+  );
 }
 
 class PaymentsCompanion extends UpdateCompanion<Payment> {
@@ -4000,7 +4050,7 @@ class PaymentsCompanion extends UpdateCompanion<Payment> {
     Expression<String>? tenancyId,
     Expression<int>? amountReceivedMinor,
     Expression<String>? currency,
-    Expression<String>? receivedDate,
+    Expression<DateTime>? receivedDate,
     Expression<String>? paymentMethod,
     Expression<String>? reference,
     Expression<String>? notes,
@@ -4076,9 +4126,7 @@ class PaymentsCompanion extends UpdateCompanion<Payment> {
       map['currency'] = Variable<String>(currency.value);
     }
     if (receivedDate.present) {
-      map['received_date'] = Variable<String>(
-        $PaymentsTable.$converterreceivedDate.toSql(receivedDate.value),
-      );
+      map['received_date'] = Variable<DateTime>(receivedDate.value);
     }
     if (paymentMethod.present) {
       map['payment_method'] = Variable<String>(
@@ -4651,8 +4699,10 @@ class $NotificationPreferencesTable extends NotificationPreferences
     return $NotificationPreferencesTable(attachedDatabase, alias);
   }
 
-  static TypeConverter<NotificationEventType, String> $convertereventType =
-      const SnakeCaseEnumConverter(NotificationEventType.values);
+  static JsonTypeConverter2<NotificationEventType, String, String>
+  $convertereventType = const EnumNameConverter<NotificationEventType>(
+    NotificationEventType.values,
+  );
 }
 
 class NotificationPreferencesCompanion
@@ -7459,17 +7509,15 @@ class $$TenanciesTableFilterComposer
     builder: (column) => ColumnWithTypeConverterFilters(column),
   );
 
-  ColumnWithTypeConverterFilters<DateTime, DateTime, String> get startDate =>
-      $composableBuilder(
-        column: $table.startDate,
-        builder: (column) => ColumnWithTypeConverterFilters(column),
-      );
+  ColumnFilters<DateTime> get startDate => $composableBuilder(
+    column: $table.startDate,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnWithTypeConverterFilters<DateTime?, DateTime, String> get endDate =>
-      $composableBuilder(
-        column: $table.endDate,
-        builder: (column) => ColumnWithTypeConverterFilters(column),
-      );
+  ColumnFilters<DateTime> get endDate => $composableBuilder(
+    column: $table.endDate,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<int> get agreedRentMinor => $composableBuilder(
     column: $table.agreedRentMinor,
@@ -7492,11 +7540,10 @@ class $$TenanciesTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnWithTypeConverterFilters<DateTime, DateTime, String> get firstDueDate =>
-      $composableBuilder(
-        column: $table.firstDueDate,
-        builder: (column) => ColumnWithTypeConverterFilters(column),
-      );
+  ColumnFilters<DateTime> get firstDueDate => $composableBuilder(
+    column: $table.firstDueDate,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<int> get dueDay => $composableBuilder(
     column: $table.dueDay,
@@ -7524,10 +7571,9 @@ class $$TenanciesTableFilterComposer
     builder: (column) => ColumnWithTypeConverterFilters(column),
   );
 
-  ColumnWithTypeConverterFilters<DateTime?, DateTime, String>
-  get effectiveTerminationDate => $composableBuilder(
+  ColumnFilters<DateTime> get effectiveTerminationDate => $composableBuilder(
     column: $table.effectiveTerminationDate,
-    builder: (column) => ColumnWithTypeConverterFilters(column),
+    builder: (column) => ColumnFilters(column),
   );
 
   ColumnFilters<String> get terminationReason => $composableBuilder(
@@ -7684,12 +7730,12 @@ class $$TenanciesTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get startDate => $composableBuilder(
+  ColumnOrderings<DateTime> get startDate => $composableBuilder(
     column: $table.startDate,
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get endDate => $composableBuilder(
+  ColumnOrderings<DateTime> get endDate => $composableBuilder(
     column: $table.endDate,
     builder: (column) => ColumnOrderings(column),
   );
@@ -7714,7 +7760,7 @@ class $$TenanciesTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get firstDueDate => $composableBuilder(
+  ColumnOrderings<DateTime> get firstDueDate => $composableBuilder(
     column: $table.firstDueDate,
     builder: (column) => ColumnOrderings(column),
   );
@@ -7744,7 +7790,7 @@ class $$TenanciesTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get effectiveTerminationDate => $composableBuilder(
+  ColumnOrderings<DateTime> get effectiveTerminationDate => $composableBuilder(
     column: $table.effectiveTerminationDate,
     builder: (column) => ColumnOrderings(column),
   );
@@ -7852,10 +7898,10 @@ class $$TenanciesTableAnnotationComposer
         builder: (column) => column,
       );
 
-  GeneratedColumnWithTypeConverter<DateTime, String> get startDate =>
+  GeneratedColumn<DateTime> get startDate =>
       $composableBuilder(column: $table.startDate, builder: (column) => column);
 
-  GeneratedColumnWithTypeConverter<DateTime?, String> get endDate =>
+  GeneratedColumn<DateTime> get endDate =>
       $composableBuilder(column: $table.endDate, builder: (column) => column);
 
   GeneratedColumn<int> get agreedRentMinor => $composableBuilder(
@@ -7877,11 +7923,10 @@ class $$TenanciesTableAnnotationComposer
     builder: (column) => column,
   );
 
-  GeneratedColumnWithTypeConverter<DateTime, String> get firstDueDate =>
-      $composableBuilder(
-        column: $table.firstDueDate,
-        builder: (column) => column,
-      );
+  GeneratedColumn<DateTime> get firstDueDate => $composableBuilder(
+    column: $table.firstDueDate,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<int> get dueDay =>
       $composableBuilder(column: $table.dueDay, builder: (column) => column);
@@ -7904,8 +7949,7 @@ class $$TenanciesTableAnnotationComposer
   GeneratedColumnWithTypeConverter<TenancyStatus, String> get status =>
       $composableBuilder(column: $table.status, builder: (column) => column);
 
-  GeneratedColumnWithTypeConverter<DateTime?, String>
-  get effectiveTerminationDate => $composableBuilder(
+  GeneratedColumn<DateTime> get effectiveTerminationDate => $composableBuilder(
     column: $table.effectiveTerminationDate,
     builder: (column) => column,
   );
@@ -8420,23 +8464,20 @@ class $$RentObligationsTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnWithTypeConverterFilters<DateTime, DateTime, String> get periodStart =>
-      $composableBuilder(
-        column: $table.periodStart,
-        builder: (column) => ColumnWithTypeConverterFilters(column),
-      );
+  ColumnFilters<DateTime> get periodStart => $composableBuilder(
+    column: $table.periodStart,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnWithTypeConverterFilters<DateTime, DateTime, String> get periodEnd =>
-      $composableBuilder(
-        column: $table.periodEnd,
-        builder: (column) => ColumnWithTypeConverterFilters(column),
-      );
+  ColumnFilters<DateTime> get periodEnd => $composableBuilder(
+    column: $table.periodEnd,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnWithTypeConverterFilters<DateTime, DateTime, String> get dueDate =>
-      $composableBuilder(
-        column: $table.dueDate,
-        builder: (column) => ColumnWithTypeConverterFilters(column),
-      );
+  ColumnFilters<DateTime> get dueDate => $composableBuilder(
+    column: $table.dueDate,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<int> get amountDueMinor => $composableBuilder(
     column: $table.amountDueMinor,
@@ -8536,17 +8577,17 @@ class $$RentObligationsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get periodStart => $composableBuilder(
+  ColumnOrderings<DateTime> get periodStart => $composableBuilder(
     column: $table.periodStart,
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get periodEnd => $composableBuilder(
+  ColumnOrderings<DateTime> get periodEnd => $composableBuilder(
     column: $table.periodEnd,
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get dueDate => $composableBuilder(
+  ColumnOrderings<DateTime> get dueDate => $composableBuilder(
     column: $table.dueDate,
     builder: (column) => ColumnOrderings(column),
   );
@@ -8617,16 +8658,15 @@ class $$RentObligationsTableAnnotationComposer
   GeneratedColumn<String> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
 
-  GeneratedColumnWithTypeConverter<DateTime, String> get periodStart =>
-      $composableBuilder(
-        column: $table.periodStart,
-        builder: (column) => column,
-      );
+  GeneratedColumn<DateTime> get periodStart => $composableBuilder(
+    column: $table.periodStart,
+    builder: (column) => column,
+  );
 
-  GeneratedColumnWithTypeConverter<DateTime, String> get periodEnd =>
+  GeneratedColumn<DateTime> get periodEnd =>
       $composableBuilder(column: $table.periodEnd, builder: (column) => column);
 
-  GeneratedColumnWithTypeConverter<DateTime, String> get dueDate =>
+  GeneratedColumn<DateTime> get dueDate =>
       $composableBuilder(column: $table.dueDate, builder: (column) => column);
 
   GeneratedColumn<int> get amountDueMinor => $composableBuilder(
@@ -8984,11 +9024,10 @@ class $$PaymentsTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnWithTypeConverterFilters<DateTime, DateTime, String> get receivedDate =>
-      $composableBuilder(
-        column: $table.receivedDate,
-        builder: (column) => ColumnWithTypeConverterFilters(column),
-      );
+  ColumnFilters<DateTime> get receivedDate => $composableBuilder(
+    column: $table.receivedDate,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnWithTypeConverterFilters<PaymentMethod, PaymentMethod, String>
   get paymentMethod => $composableBuilder(
@@ -9104,7 +9143,7 @@ class $$PaymentsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get receivedDate => $composableBuilder(
+  ColumnOrderings<DateTime> get receivedDate => $composableBuilder(
     column: $table.receivedDate,
     builder: (column) => ColumnOrderings(column),
   );
@@ -9188,11 +9227,10 @@ class $$PaymentsTableAnnotationComposer
   GeneratedColumn<String> get currency =>
       $composableBuilder(column: $table.currency, builder: (column) => column);
 
-  GeneratedColumnWithTypeConverter<DateTime, String> get receivedDate =>
-      $composableBuilder(
-        column: $table.receivedDate,
-        builder: (column) => column,
-      );
+  GeneratedColumn<DateTime> get receivedDate => $composableBuilder(
+    column: $table.receivedDate,
+    builder: (column) => column,
+  );
 
   GeneratedColumnWithTypeConverter<PaymentMethod, String> get paymentMethod =>
       $composableBuilder(

@@ -12,8 +12,7 @@ class Properties extends Table {
   TextColumn get id => text()();
   TextColumn get landlordId => text().references(LandlordProfiles, #id)();
   TextColumn get name => text()();
-  TextColumn get propertyType =>
-      textEnum<PropertyType>()();
+  TextColumn get propertyType => textEnum<PropertyType>()();
   TextColumn get description => text().nullable()();
   TextColumn get addressLine => text().nullable()();
   TextColumn get areaOrTown => text().nullable()();
@@ -24,8 +23,7 @@ class Properties extends Table {
   RealColumn get latitude => real().nullable()();
   RealColumn get longitude => real().nullable()();
   TextColumn get privateNotes => text().nullable()();
-  TextColumn get recordStatus =>
-      textEnum<RecordStatus>()();
+  TextColumn get recordStatus => textEnum<RecordStatus>()();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime()();
   DateTimeColumn get archivedAt => dateTime().nullable()();
@@ -47,8 +45,7 @@ class Units extends Table {
   TextColumn get id => text()();
   TextColumn get propertyId => text().references(Properties, #id)();
   TextColumn get name => text()();
-  TextColumn get unitType =>
-      textEnum<UnitType>()();
+  TextColumn get unitType => textEnum<UnitType>()();
   TextColumn get description => text().nullable()();
   TextColumn get floorOrLevel => text().nullable()();
   RealColumn get sizeValue => real().nullable()();
@@ -58,8 +55,7 @@ class Units extends Table {
       text().withDefault(const Constant(defaultCurrencyCode))();
   TextColumn get availabilityOverride => textEnum<AvailabilityRestriction>()();
   TextColumn get privateNotes => text().nullable()();
-  TextColumn get recordStatus =>
-      textEnum<RecordStatus>()();
+  TextColumn get recordStatus => textEnum<RecordStatus>()();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime()();
   DateTimeColumn get archivedAt => dateTime().nullable()();
