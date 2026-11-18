@@ -1,0 +1,8 @@
+targets:
+  $default:
+    builders:
+      drift_dev:
+        options:
+          # Store DateTime columns as ISO-8601 text (UTC timestamps stay
+          # readable and unambiguous) instead of unix seconds.
+          store_date_time_values_as_text: true
